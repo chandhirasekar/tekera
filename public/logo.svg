@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <!-- Style block to ensure standard font rendering -->
+  <style>
+    .font-heavy { font-family: 'Outfit', 'Inter', -apple-system, sans-serif; font-weight: 900; }
+    .font-bold { font-family: 'Outfit', 'Inter', -apple-system, sans-serif; font-weight: 800; }
+    .font-medium { font-family: 'Outfit', 'Inter', -apple-system, sans-serif; font-weight: 600; }
+  </style>
+
+  <!-- 1. ICON GROUP (Centered at X=150, Y=50) -->
+  <g transform="translate(0, 5)">
+    <!-- The Globe (Orange/Yellow circle with white grid lines) -->
+    <g transform="translate(172, 28)">
+      <circle cx="0" cy="0" r="18" fill="#ffc63c" />
+      <!-- Grid Lines -->
+      <line x1="-18" y1="0" x2="18" y2="0" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="-18" x2="0" y2="18" stroke="#ffffff" stroke-width="1.2" />
+      <!-- Latitude Curve -->
+      <path d="M -15.5,-9 Q 0,-4 15.5,-9" fill="none" stroke="#ffffff" stroke-width="1.2" />
+      <path d="M -15.5,9 Q 0,4 15.5,9" fill="none" stroke="#ffffff" stroke-width="1.2" />
+      <!-- Longitude Curve -->
+      <path d="M -9,-15.5 Q -4,0 -9,15.5" fill="none" stroke="#ffffff" stroke-width="1.2" />
+      <path d="M 9,-15.5 Q 4,0 9,15.5" fill="none" stroke="#ffffff" stroke-width="1.2" />
+    </g>
+
+    <!-- The Stylized Figure (Blue gymnast/detailer) -->
+    <!-- Head -->
+    <circle cx="144" cy="20" r="7.5" fill="#0f62ac" />
+    <!-- Body/Limbs Path -->
+    <path d="M 143.5,27.5
+             C 140,23 133,14 125.5,16.5
+             C 123.5,17.2 124.5,19 127,19.5
+             C 134.5,21 139.5,28 141,33.5
+             C 142.5,39 143.5,49 140.5,59.5
+             C 137.5,70 131,80.5 122.5,86.5
+             C 120.5,88 122,89.5 124.5,88.5
+             C 133.5,84.5 139.5,73 143,62
+             C 144,59 146.5,65.5 151,74
+             C 155.5,82.5 161.5,88.5 166.5,90.5
+             C 168,91 169,89.5 167,88
+             C 161.5,84 156.5,77 151.5,68
+             C 147.5,60.5 146.5,50 147.5,41.5
+             C 148.5,33 151.5,27.5 157.5,23.5
+             C 159.5,22 158.5,20.5 156,21.5
+             C 150.5,23.5 146.5,26.5 143.5,27.5 Z"
+          fill="#0f62ac" />
+  </g>
+
+  <!-- 2. TYPOGRAPHY GROUP (Centered horizontally) -->
+  <!-- "TeKeRa" Text with custom letter spacing -->
+  <text x="150" y="132" class="font-heavy" font-size="36" fill="#0f62ac" text-anchor="middle" letter-spacing="1">TeKeRa</text>
+
+  <!-- Orange/Yellow "TRAINING CENTER" rounded box -->
+  <rect x="55" y="142" width="190" height="26" rx="5" fill="#ffc63c" />
+  <text x="150" y="159" class="font-heavy" font-size="13" fill="#ffffff" text-anchor="middle" letter-spacing="2">TRAINING CENTER</text>
+
+  <!-- Divider Line -->
+  <line x1="40" y1="177" x2="260" y2="177" stroke="#0f62ac" stroke-width="1.2" opacity="0.35" />
+
+  <!-- Slogan: "AUTHORIZED TEKLA TRAINING CENTER" -->
+  <text x="150" y="188" class="font-medium" font-size="7.5" fill="#292929" text-anchor="middle" letter-spacing="1.8">AUTHORIZED TEKLA TRAINING CENTER</text>
+
+  <!-- Sub-slogan: "SINCE 2018" -->
+  <text x="150" y="198" class="font-bold" font-size="8.5" fill="#e5b230" text-anchor="middle" letter-spacing="1.2">SINCE 2018</text>
+</svg>
