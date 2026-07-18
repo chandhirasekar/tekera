@@ -194,21 +194,44 @@ export default function Home() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.phone) {
       setFormSubmitted(true);
       
-      // Submit details directly to WhatsApp for instant action
-      const whatsappText = `Hi Tekera, I am interested in enrolling for the course. Here are my details:
+      try {
+        // Submit details directly to Web3Forms API to deliver leads to email
+        // Note: Replace "YOUR_ACCESS_KEY_HERE" with a free access key from https://web3forms.com/
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: "YOUR_ACCESS_KEY_HERE", 
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            timing: formData.timing,
+            message: formData.message || "N/A",
+            subject: "New Student Enrollment Lead - Tekera Training Center"
+          })
+        });
+        
+        // Also open WhatsApp in parallel for instant client chat action
+        const whatsappText = `Hi Tekera, I am interested in enrolling for the course. Here are my details:
 - Name: ${formData.name}
 - Email: ${formData.email}
 - Phone: ${formData.phone}
 - Preferred Timing: ${formData.timing}
 - Message: ${formData.message || "N/A"}`;
-      
-      const whatsappUrl = `https://wa.me/918667299312?text=${encodeURIComponent(whatsappText)}`;
-      window.open(whatsappUrl, "_blank");
+        
+        const whatsappUrl = `https://wa.me/918667299312?text=${encodeURIComponent(whatsappText)}`;
+        window.open(whatsappUrl, "_blank");
+      } catch (error) {
+        console.error("Error submitting form", error);
+      }
 
       setTimeout(() => {
         setFormSubmitted(false);
@@ -555,7 +578,6 @@ export default function Home() {
                 className="w-full h-full object-contain aspect-video"
                 controls
                 autoPlay={false}
-                poster="/logo.jpg"
               >
                 Your browser does not support the video tag.
               </video>
