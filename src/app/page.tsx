@@ -3,9 +3,57 @@
 import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { 
+  Award, 
+  Users, 
+  User,
+  FileText, 
+  Briefcase, 
+  HardHat, 
+  Phone, 
+  Mail, 
+  Globe, 
+  MapPin, 
+  ChevronLeft, 
+  ChevronRight, 
+  CheckCircle2, 
+  MessageSquare,
+  Plus,
+  Minus,
+  Clock,
+  BookOpen,
+  ArrowRight,
+  HelpCircle
+} from "lucide-react";
 
+// Custom inline SVG Social Icons to avoid library import issues
+function Instagram({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  );
+}
 
-// Testimonials data from database
+function Linkedin({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+    </svg>
+  );
+}
+
+function Youtube({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M23.498 6.163c-.272-1.015-1.074-1.819-2.089-2.09C19.569 3.545 12 3.545 12 3.545s-7.57 0-9.409.528c-1.015.27-1.817 1.075-2.089 2.09C0 8.002 0 12 0 12s0 3.998.502 5.837c.272 1.016 1.074 1.819 2.089 2.09C4.43 20.455 12 20.455 12 20.455s7.57 0 9.41-.528c1.015-.27 1.817-1.074 2.089-2.09C24 15.998 24 12 24 12s0-3.998-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  );
+}
+
+// Testimonials data from database with photos
 const testimonials = [
   {
     id: 701,
@@ -13,7 +61,8 @@ const testimonials = [
     company: "3DE Global",
     role: "Tekla Modeler",
     content: "Before joining Tekera, I had no experience in Tekla Structures. The hands-on training and real-world projects gave me the confidence to master the software. Thanks to the placement support, I secured a job at 3DE Global as a Tekla Modeler. I highly recommend Tekera for anyone serious about a career in BIM and structural detailing!",
-    student: "Arun Kumar"
+    student: "Arun Kumar",
+    image: "/images/testimonials/arun.jpg"
   },
   {
     id: 702,
@@ -21,7 +70,8 @@ const testimonials = [
     company: "Esskay Structures",
     role: "Steel Detailer",
     content: "Coming from a CAD background, I wanted to upskill in Tekla Structures to improve my job prospects. The expert instructors at Tekera made learning easy, and the placement team ensured I landed a role at Esskay Structures. I am now working on large-scale structural projects, all thanks to Tekera's training and mentorship!",
-    student: "Priya Dharshini"
+    student: "Priya Dharshini",
+    image: "/images/testimonials/priya.jpg"
   },
   {
     id: 703,
@@ -29,7 +79,8 @@ const testimonials = [
     company: "E2G Engineering Services",
     role: "Sr. BIM Engineer (UAE)",
     content: "Tekera not only gave me the technical skills but also prepared me for interviews and workplace challenges. I started my career at E2G Engineering Services, and within a year, I was offered an opportunity in UAE. The training here truly opens global doors!",
-    student: "Mohamed Riaz"
+    student: "Mohamed Riaz",
+    image: "/images/testimonials/riaz.jpg"
   },
   {
     id: 704,
@@ -37,11 +88,12 @@ const testimonials = [
     company: "Hi-Q Engineering",
     role: "Tekla Detailer",
     content: "What sets Tekera apart is their real-world approach to learning. We didn’t just study tools—we worked on live projects, making it easy to adapt to industry workflows. Thanks to their placement assistance, I secured a position at Hi-Q Engineering, where I now work on high-rise structures and industrial projects.",
-    student: "Sanjay Balaji"
+    student: "Sanjay Balaji",
+    image: "/images/testimonials/sanjay.jpg"
   }
 ];
 
-// FAQS from database
+// FAQS with placement & interview support details
 const faqs = [
   {
     question: "Who can enroll in this course?",
@@ -50,6 +102,10 @@ const faqs = [
   {
     question: "Do I need prior knowledge of Tekla?",
     answer: "No prior experience with Tekla is required! Our Tekla Structures Fundamentals course starts from the basics and gradually moves to advanced concepts. However, a basic understanding of engineering drawings and structural elements would be beneficial."
+  },
+  {
+    question: "Is placement and mock interview support included?",
+    answer: "Yes! We provide guaranteed placement support and FREE mock interview preparation (including resume building, portfolio creation, mock technical/HR reviews, and direct employer connection) for all our students. This is a core focus to ensure you land a valuable job!"
   },
   {
     question: "What career paths can I pursue after completing the course?",
@@ -61,16 +117,49 @@ const faqs = [
   }
 ];
 
+// Student video testimonials
+const studentVideos = [
+  {
+    id: 1,
+    student: "Arun Kumar",
+    role: "Tekla Modeler at 3DE Global",
+    src: "/videos/VID_20260718_051250_346.mp4",
+    duration: "Testimonial"
+  },
+  {
+    id: 2,
+    student: "Priya Dharshini",
+    role: "Steel Detailer at Esskay Structures",
+    src: "/videos/VID_20260718_051255_884.mp4",
+    duration: "Testimonial"
+  },
+  {
+    id: 3,
+    student: "Mohamed Riaz",
+    role: "Sr. BIM Engineer (UAE) at E2G",
+    src: "/videos/VID_20260718_051301_758.mp4",
+    duration: "Testimonial"
+  },
+  {
+    id: 4,
+    student: "Sanjay Balaji",
+    role: "Tekla Detailer at Hi-Q Engineering",
+    src: "/videos/VID_20260718_051316_435.mp4",
+    duration: "Testimonial"
+  }
+];
+
 const partners = [
   "3DE Global", "Esskay Structures", "E2G Engineering", "Hi-Q", 
   "Gen Engineering", "Edanbrook", "Fidelis", "AISD Engineering", 
   "Cistron Infotek", "Unicrest Engineering", "4D Detailing", 
   "Duinz Engineering", "Strutech", "ASD Engineering", 
-  "Caldim Engineering", "Eversendai", "DGS", "Pangulf"
+  "Caldim Engineering", "Eversendai", "DGS", "Pangulf", "3DE Global"
 ];
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"learn" | "for" | "highlights">("learn");
+  const [selectedVideo, setSelectedVideo] = useState(studentVideos[0]);
   const [testimonialIdx, setTestimonialIdx] = useState(0);
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -109,6 +198,18 @@ export default function Home() {
     e.preventDefault();
     if (formData.name && formData.email && formData.phone) {
       setFormSubmitted(true);
+      
+      // Submit details directly to WhatsApp for instant action
+      const whatsappText = `Hi Tekera, I am interested in enrolling for the course. Here are my details:
+- Name: ${formData.name}
+- Email: ${formData.email}
+- Phone: ${formData.phone}
+- Preferred Timing: ${formData.timing}
+- Message: ${formData.message || "N/A"}`;
+      
+      const whatsappUrl = `https://wa.me/918667299312?text=${encodeURIComponent(whatsappText)}`;
+      window.open(whatsappUrl, "_blank");
+
       setTimeout(() => {
         setFormSubmitted(false);
         setFormData({
@@ -130,22 +231,29 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3 group">
             <img 
-              src="/logo.svg" 
+              src="/Tek_Logo.png" 
               alt="TeKeRa Training Center Logo" 
-              className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-102"
+              className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 font-medium text-sm text-gray-600">
-            <a href="#why-choose-us" className="hover:text-brand-blue transition-colors duration-200">Why Us</a>
-            <a href="#course" className="hover:text-brand-blue transition-colors duration-200">Courses</a>
-            <a href="#corporate" className="hover:text-brand-blue transition-colors duration-200">Corporate</a>
-            <a href="#testimonials" className="hover:text-brand-blue transition-colors duration-200">Reviews</a>
-            <a href="#faqs" className="hover:text-brand-blue transition-colors duration-200">FAQs</a>
+          {/* Desktop Navigation Links with premium hover underlines */}
+          <nav className="hidden md:flex items-center gap-8 font-semibold text-sm text-gray-600">
+            <a href="#why-choose-us" className="relative py-2 transition-colors hover:text-brand-blue after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-brand-yellow hover:after:w-full after:transition-all after:duration-300">Why Us</a>
+            <a href="#course" className="relative py-2 transition-colors hover:text-brand-blue after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-brand-yellow hover:after:w-full after:transition-all after:duration-300">Courses</a>
+            <a href="#corporate" className="relative py-2 transition-colors hover:text-brand-blue after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-brand-yellow hover:after:w-full after:transition-all after:duration-300">Corporate</a>
+            <a href="#testimonials" className="relative py-2 transition-colors hover:text-brand-blue after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-brand-yellow hover:after:w-full after:transition-all after:duration-300">Reviews</a>
+            <a href="#faqs" className="relative py-2 transition-colors hover:text-brand-blue after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-brand-yellow hover:after:w-full after:transition-all after:duration-300">FAQs</a>
           </nav>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-6">
+            <a 
+              href="tel:+918667299312" 
+              className="flex items-center gap-2 text-sm font-bold text-brand-blue hover:text-brand-blue-dark transition-colors font-sans"
+            >
+              <Phone className="w-4 h-4 text-brand-yellow-dark" />
+              <span>+91 86672 99312</span>
+            </a>
             <a 
               href="#enroll" 
               className="px-6 py-2.5 rounded-full bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold text-sm shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/30 transition-all duration-200 transform hover:-translate-y-0.5"
@@ -176,42 +284,50 @@ export default function Home() {
             <a 
               href="#why-choose-us" 
               onClick={() => setMobileMenuOpen(false)}
-              className="font-medium text-gray-700 py-2 border-b border-gray-50"
+              className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               Why Choose Us
             </a>
             <a 
               href="#course" 
               onClick={() => setMobileMenuOpen(false)}
-              className="font-medium text-gray-700 py-2 border-b border-gray-50"
+              className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               Our Courses
             </a>
             <a 
               href="#corporate" 
               onClick={() => setMobileMenuOpen(false)}
-              className="font-medium text-gray-700 py-2 border-b border-gray-50"
+              className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               Corporate Partnerships
             </a>
             <a 
               href="#testimonials" 
               onClick={() => setMobileMenuOpen(false)}
-              className="font-medium text-gray-700 py-2 border-b border-gray-50"
+              className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               Success Stories
             </a>
             <a 
               href="#faqs" 
               onClick={() => setMobileMenuOpen(false)}
-              className="font-medium text-gray-700 py-2 border-b border-gray-50"
+              className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               FAQs
             </a>
             <a 
+              href="tel:+918667299312"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-bold text-brand-blue py-2 border-b border-gray-50 flex items-center gap-2"
+            >
+              <Phone className="w-4 h-4 text-brand-yellow-dark" />
+              Call: +91 86672 99312
+            </a>
+            <a 
               href="#enroll" 
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-3 rounded-xl bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold shadow-md"
+              className="w-full text-center py-3 rounded-xl bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold shadow-md block"
             >
               Enrol Now
             </a>
@@ -219,12 +335,13 @@ export default function Home() {
         )}
       </header>
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-20 lg:py-28 overflow-hidden">
-        {/* Subtle geometric grid background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-        <div className="absolute top-1/4 left-1/10 w-96 h-96 rounded-full bg-brand-yellow/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/10 w-96 h-96 rounded-full bg-brand-blue-dark/50 blur-3xl pointer-events-none" />
+      {/* Hero Section with subtle overlay grid pattern and background depth */}
+      <section className="relative bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-20 lg:py-28 overflow-hidden font-sans">
+        {/* Geometric technical blueprint grid background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff07_1px,transparent_1px),linear-gradient(to_bottom,#ffffff07_1px,transparent_1px)] bg-[size:28px_28px] pointer-events-none" />
+        {/* Glow rings */}
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-brand-yellow/5 blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 -right-40 w-[500px] h-[500px] rounded-full bg-blue-300/10 blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -232,13 +349,13 @@ export default function Home() {
             {/* Hero Left Content */}
             <div className="lg:col-span-7 flex flex-col items-start gap-6" data-aos="fade-right">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold tracking-wider text-brand-yellow uppercase" data-aos="fade-down" data-aos-delay="100">
-                <span>⚡</span> Authorized Tekla Training Center in Tamil Nadu
+                <Award className="w-4 h-4 text-brand-yellow" /> Authorized Tekla Training Center in Tamil Nadu
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight" data-aos="fade-up" data-aos-delay="200">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight leading-tight" data-aos="fade-up" data-aos-delay="200">
                 Empowering Your Career in <span className="text-brand-yellow">Structural Detailing</span>
               </h1>
-              <p className="text-lg text-blue-100/90 max-w-2xl leading-relaxed" data-aos="fade-up" data-aos-delay="300">
-                Welcome to the well-planned learning source of Tekera. Bridge the gap between engineering theory and structural steel detailing. Learn from active state experts, build a professional portfolio, and secure high-value placements.
+              <p className="text-base md:text-lg text-blue-100/90 max-w-2xl leading-relaxed font-sans" data-aos="fade-up" data-aos-delay="300">
+                Bridge the gap between engineering theory and real structural steel detailing. Learn from active industry experts, build a professional portfolio, and secure high-value placements.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-4" data-aos="fade-up" data-aos-delay="400">
@@ -250,14 +367,14 @@ export default function Home() {
                 </a>
                 <a 
                   href="#course" 
-                  className="px-8 py-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-base border border-white/20 transition-all duration-200 text-center backdrop-blur-md"
+                  className="px-8 py-4 rounded-xl bg-transparent hover:bg-white/10 text-white font-semibold text-base border-2 border-white transition-all duration-200 text-center backdrop-blur-md transform hover:-translate-y-0.5"
                 >
                   Explore Course
                 </a>
               </div>
 
               {/* Placements Info */}
-              <div className="flex items-center gap-4 mt-6 text-sm text-blue-100/80" data-aos="fade-up" data-aos-delay="500">
+              <div className="flex items-center gap-4 mt-6 text-sm text-blue-100/80 font-sans" data-aos="fade-up" data-aos-delay="500">
                 <div className="flex -space-x-2">
                   <div className="w-8 h-8 rounded-full bg-brand-yellow flex items-center justify-center text-xs font-black text-brand-slate border-2 border-brand-blue">1</div>
                   <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-xs font-black text-brand-blue border-2 border-brand-blue">2</div>
@@ -267,30 +384,30 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Hero Right Metrics Grid */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+            {/* Hero Right Metrics Grid with Poppins text for numbers */}
+            <div className="lg:col-span-5 grid grid-cols-2 gap-4 font-sans">
               <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex flex-col gap-2 hover:bg-white/10 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
-                <span className="text-4xl lg:text-5xl font-black text-brand-yellow">180+</span>
+                <span className="text-4xl lg:text-5xl font-black font-heading text-brand-yellow">180+</span>
                 <span className="text-sm font-semibold tracking-wide text-blue-100">Students Placed</span>
-                <p className="text-xs text-blue-200/70">Across major steel design houses and BIM detailers.</p>
+                <p className="text-xs text-blue-200/70 leading-normal">Across major steel design houses and BIM detailers.</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex flex-col gap-2 hover:bg-white/10 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
-                <span className="text-4xl lg:text-5xl font-black text-brand-yellow">100+</span>
+                <span className="text-4xl lg:text-5xl font-black font-heading text-brand-yellow">100+</span>
                 <span className="text-sm font-semibold tracking-wide text-blue-100">Partner Companies</span>
-                <p className="text-xs text-blue-200/70">Global design firms recruit directly from our center.</p>
+                <p className="text-xs text-blue-200/70 leading-normal">Global design firms recruit directly from our center.</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex flex-col gap-2 hover:bg-white/10 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
-                <span className="text-4xl lg:text-5xl font-black text-brand-yellow">#1</span>
+                <span className="text-4xl lg:text-5xl font-black font-heading text-brand-yellow">#1</span>
                 <span className="text-sm font-semibold tracking-wide text-blue-100">Accredited Center</span>
-                <p className="text-xs text-blue-200/70">Official Tekla structures training software and curriculum.</p>
+                <p className="text-xs text-blue-200/70 leading-normal">Official Tekla structures training software and curriculum.</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex flex-col gap-2 hover:bg-white/10 transition-all duration-300" data-aos="zoom-in" data-aos-delay="400">
-                <span className="text-4xl lg:text-5xl font-black text-brand-yellow">8+ Yrs</span>
+                <span className="text-4xl lg:text-5xl font-black font-heading text-brand-yellow">8+ Yrs</span>
                 <span className="text-sm font-semibold tracking-wide text-blue-100">Proven Experience</span>
-                <p className="text-xs text-blue-200/70">Delivering quality education and expert career mentorship.</p>
+                <p className="text-xs text-blue-200/70 leading-normal">Delivering quality education and expert career mentorship.</p>
               </div>
             </div>
 
@@ -298,22 +415,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Partners Moving Ribbon */}
-      <section className="bg-white border-y border-gray-100 py-10 overflow-hidden">
+      {/* Partners Moving Ribbon with standardized font and grayscale colors */}
+      <section className="bg-white border-y border-gray-100 py-8 overflow-hidden font-sans">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">
+          <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
             Where Our Students are Placed
           </p>
           <div className="relative w-full flex overflow-x-hidden">
             {/* Carousel loop */}
-            <div className="animate-marquee flex whitespace-nowrap gap-12 text-lg font-bold text-gray-400">
+            <div className="animate-marquee flex whitespace-nowrap gap-16 text-sm font-bold uppercase tracking-wider text-gray-400 select-none">
               {partners.map((partner, index) => (
-                <span key={index} className="hover:text-brand-blue transition-colors duration-200 select-none">
-                  {partner}
-                </span>
-              ))}
-              {partners.map((partner, index) => (
-                <span key={`dup-${index}`} className="hover:text-brand-blue transition-colors duration-200 select-none">
+                <span key={index} className="hover:text-brand-blue transition-colors duration-200">
                   {partner}
                 </span>
               ))}
@@ -322,12 +434,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section id="why-choose-us" className="py-20 lg:py-28 bg-gray-50 scroll-mt-20">
+      {/* Why Choose Us Section with Poppins/Inter font standardisation */}
+      <section id="why-choose-us" className="py-20 lg:py-28 bg-gray-50 scroll-mt-20 font-sans">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-4" data-aos="fade-up">
-            <span className="text-brand-blue font-extrabold text-sm uppercase tracking-widest">Why Choose Us</span>
-            <h2 className="text-3xl md:text-4xl font-black text-brand-slate tracking-tight">
+            <span className="text-brand-blue font-bold text-sm uppercase tracking-widest">Why Choose Us</span>
+            <h2 className="text-3xl md:text-4xl font-black font-heading text-brand-slate tracking-tight">
               Leading the Industry in Steel Structural Detailing Education
             </h2>
             <p className="text-gray-600">
@@ -337,65 +449,75 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Card 1 */}
-            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 group" data-aos="fade-up" data-aos-delay="100">
-              <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-xl font-bold group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                ⭐
+            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 justify-between group" data-aos="fade-up" data-aos-delay="100">
+              <div className="flex flex-col gap-4">
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue transition-colors duration-300 group-hover:bg-brand-blue group-hover:text-white">
+                  <Award className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-heading text-brand-slate">Authorized Tekla Center</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Learn from the best. Our official accreditation ensures you receive top-quality training aligned with industry standards for more than 8+ Years.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-brand-slate">Authorized Tekla Center</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Learn from the best. Our official accreditation ensures you receive top-quality training aligned with industry standards for more than 8+ Years.
-              </p>
             </div>
 
             {/* Card 2 */}
-            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 group" data-aos="fade-up" data-aos-delay="200">
-              <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-xl font-bold group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                👨‍🏫
+            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 justify-between group" data-aos="fade-up" data-aos-delay="200">
+              <div className="flex flex-col gap-4">
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue transition-colors duration-300 group-hover:bg-brand-blue group-hover:text-white">
+                  <Users className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-heading text-brand-slate">Expert Instructors</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Benefit from the knowledge and experience of seasoned Tekla professionals who are passionate about teaching and are from real working state experts.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-brand-slate">Expert Instructors</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Benefit from the knowledge and experience of seasoned Tekla professionals who are passionate about teaching and are from real working state experts.
-              </p>
             </div>
 
             {/* Card 3 */}
-            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 group" data-aos="fade-up" data-aos-delay="300">
-              <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-xl font-bold group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                📝
+            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 justify-between group" data-aos="fade-up" data-aos-delay="300">
+              <div className="flex flex-col gap-4">
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue transition-colors duration-300 group-hover:bg-brand-blue group-hover:text-white">
+                  <FileText className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-heading text-brand-slate">Free Mock Interview Preparation</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  We equip you with the skills and confidence to ace your interviews. Our preparation includes resume building, mock interviews, and personalized feedback — <strong>completely free for all enrolled students</strong>.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-brand-slate">Interview Preparation</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                We equip you with the skills and confidence to ace your interviews. Our preparation includes resume building, mock interviews, and personalized feedback.
-              </p>
             </div>
 
             {/* Card 4 */}
-            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 group" data-aos="fade-up" data-aos-delay="100">
-              <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-xl font-bold group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                💼
+            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 justify-between group" data-aos="fade-up" data-aos-delay="100">
+              <div className="flex flex-col gap-4">
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue transition-colors duration-300 group-hover:bg-brand-blue group-hover:text-white">
+                  <Briefcase className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-heading text-brand-slate">Guaranteed Placement Support</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  We're committed to your success. Our dedicated placement team provides comprehensive support to help you land your dream job and we have placed more than 180+ students.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-brand-slate">Guaranteed Placement Support</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                We're committed to your success. Our dedicated placement team provides comprehensive support to help you land your dream job and we have placed more than 180+ students.
-              </p>
             </div>
 
             {/* Card 5 */}
-            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 group" data-aos="fade-up" data-aos-delay="200">
-              <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-xl font-bold group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                🏗️
+            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col gap-4 justify-between group" data-aos="fade-up" data-aos-delay="200">
+              <div className="flex flex-col gap-4">
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue transition-colors duration-300 group-hover:bg-brand-blue group-hover:text-white">
+                  <HardHat className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-heading text-brand-slate">Hands-on Real Detailing</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Gain practical skills through hands-on projects and real-world simulations, preparing you fully for the real challenges of the steel construction industry.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-brand-slate">Hands-on Real Detailing</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Gain practical skills through hands-on projects and real-world simulations, preparing you fully for the real challenges of the steel construction industry.
-              </p>
             </div>
 
             {/* Card 6 */}
             <div className="p-8 rounded-2xl bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white shadow-lg flex flex-col justify-between hover:scale-[1.02] transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
               <div className="flex flex-col gap-3">
                 <span className="text-brand-yellow font-extrabold text-sm uppercase tracking-wider">Ready to Begin?</span>
-                <h3 className="text-2xl font-black">Secure Your Career in BIM Detailing</h3>
+                <h3 className="text-2xl font-black font-heading">Secure Your Career in BIM Detailing</h3>
                 <p className="text-blue-100 text-sm leading-relaxed">
                   Join Tamil Nadu's top training cohort and get certified by the leading authorized detailing academy.
                 </p>
@@ -411,33 +533,80 @@ export default function Home() {
         </div>
       </section>
 
-      {/* YouTube Video Section */}
-      <section className="py-16 bg-white border-y border-gray-100">
-        <div className="max-w-4xl mx-auto px-6 text-center" data-aos="zoom-in">
-          <span className="text-brand-blue font-extrabold text-xs uppercase tracking-widest mb-2 block">Inside our Classroom</span>
-          <h2 className="text-2xl md:text-3xl font-black text-brand-slate mb-8">Watch a Sample Tekla Structures Session</h2>
-          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-100">
-            <iframe 
-              className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/d5bUhCmKaEs" 
-              title="Tekera Training Overview"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            />
+      {/* Testimonials Video Section (Hear From Our Students) */}
+      <section className="py-20 bg-white border-y border-gray-100 font-sans scroll-mt-20" id="student-videos">
+        <div className="max-w-6xl mx-auto px-6" data-aos="zoom-in">
+          <div className="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
+            <span className="text-brand-blue font-bold text-sm uppercase tracking-widest">Hear From Our Students</span>
+            <h2 className="text-3xl md:text-4xl font-black font-heading text-brand-slate tracking-tight">
+              Real Testimonials & Success Stories
+            </h2>
+            <p className="text-gray-600 font-sans">
+              Real stories from students who trained at Tekera and are now working as professional Tekla modelers and detailers.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+            {/* Main Video Player */}
+            <div className="lg:col-span-8 bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 flex flex-col justify-between relative min-h-[300px] sm:min-h-[400px]">
+              <video 
+                key={selectedVideo.id}
+                src={`${selectedVideo.src}?v=1.1`}
+                className="w-full h-full object-contain aspect-video"
+                controls
+                autoPlay={false}
+                poster="/logo.jpg"
+              >
+                Your browser does not support the video tag.
+              </video>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-6 pointer-events-none">
+                <h4 className="text-white font-bold text-lg font-heading">{selectedVideo.student}</h4>
+                <p className="text-brand-yellow text-sm font-semibold">{selectedVideo.role}</p>
+              </div>
+            </div>
+
+            {/* Video Playlist Side Panel */}
+            <div className="lg:col-span-4 flex flex-col justify-start">
+              <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3">Select Testimonial:</span>
+              <div className="flex flex-col gap-3 overflow-y-auto max-h-[380px] pr-1">
+                {studentVideos.map((video) => (
+                  <button
+                    key={video.id}
+                    onClick={() => setSelectedVideo(video)}
+                    className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-start gap-4 ${
+                      selectedVideo.id === video.id
+                        ? "bg-brand-blue/5 border-brand-blue/30 shadow-md"
+                        : "bg-gray-50 border-gray-100 hover:bg-gray-100/70"
+                    }`}
+                  >
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                      selectedVideo.id === video.id ? "bg-brand-blue text-white" : "bg-brand-blue/10 text-brand-blue"
+                    }`}>
+                      <Users className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-gray-800 text-sm font-heading">{video.student}</h5>
+                      <p className="text-xs text-gray-500 mt-0.5">{video.role}</p>
+                      <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full bg-brand-yellow/15 text-brand-yellow-dark text-[9px] font-bold uppercase">{video.duration}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Course Overview & Timing Tabs Section */}
-      <section id="course" className="py-20 lg:py-28 bg-gray-50 scroll-mt-20">
+      <section id="course" className="py-20 lg:py-28 bg-gray-50 scroll-mt-20 font-sans">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             
             {/* Left Course Copy */}
             <div className="lg:col-span-5 flex flex-col gap-6" data-aos="fade-right">
-              <span className="text-brand-blue font-extrabold text-sm uppercase tracking-widest">Our Courses & Timelines</span>
-              <h2 className="text-3xl md:text-4xl font-black text-brand-slate tracking-tight">
+              <span className="text-brand-blue font-bold text-sm uppercase tracking-widest">Our Courses & Timelines</span>
+              <h2 className="text-3xl md:text-4xl font-black font-heading text-brand-slate tracking-tight">
                 Tekla Structures Fundamentals
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -446,10 +615,10 @@ export default function Home() {
 
               {/* Timings Display Cards */}
               <div className="flex flex-col gap-4 mt-4 bg-white p-6 rounded-2xl border border-gray-100">
-                <h4 className="font-extrabold text-brand-slate text-lg border-b border-gray-100 pb-3">Available Timings</h4>
+                <h4 className="font-extrabold font-heading text-brand-slate text-lg border-b border-gray-100 pb-3">Available Timings</h4>
                 
                 <div className="flex items-start gap-4">
-                  <div className="px-3 py-1 rounded bg-brand-blue/10 text-brand-blue text-xs font-black uppercase mt-1">Full-Time</div>
+                  <div className="px-3 py-1 rounded bg-brand-blue/10 text-brand-blue text-xs font-black uppercase mt-1 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Full-Time</div>
                   <div>
                     <h5 className="font-bold text-gray-800 text-sm">Monday to Friday</h5>
                     <p className="text-xs text-gray-500">6-8 hours daily intensive classroom & practical projects.</p>
@@ -457,7 +626,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="px-3 py-1 rounded bg-brand-yellow/20 text-brand-yellow-dark text-xs font-black uppercase mt-1">Part-Time</div>
+                  <div className="px-3 py-1 rounded bg-brand-yellow/20 text-brand-yellow-dark text-xs font-black uppercase mt-1 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Part-Time</div>
                   <div>
                     <h5 className="font-bold text-gray-800 text-sm">Morning & Evening Batches</h5>
                     <p className="text-xs text-gray-500">Flexibility for working professionals or college students.</p>
@@ -465,10 +634,10 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="px-3 py-1 rounded bg-purple-50 text-purple-600 text-xs font-black uppercase mt-1">Saturdays</div>
+                  <div className="px-3 py-1 rounded bg-purple-50 text-purple-600 text-xs font-black uppercase mt-1 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Saturdays</div>
                   <div>
-                    <h5 className="font-bold text-gray-800 text-sm">Clarifications & Mock Interviews</h5>
-                    <p className="text-xs text-gray-500">Dedicated mentorship sessions, resume building, and feedback.</p>
+                    <h5 className="font-bold text-gray-800 text-sm">Clarifications & Mock Interviews (FREE for students)</h5>
+                    <p className="text-xs text-gray-500">Free dedicated mentorship sessions, resume building, and feedback for all enrolled students.</p>
                   </div>
                 </div>
               </div>
@@ -481,21 +650,21 @@ export default function Home() {
               <div className="flex border-b border-gray-200">
                 <button 
                   onClick={() => setActiveTab("learn")}
-                  className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all ${activeTab === "learn" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
+                  className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all flex items-center justify-center gap-2 ${activeTab === "learn" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
                 >
-                  📖 What You'll Learn
+                  <BookOpen className="w-4 h-4" /> What You'll Learn
                 </button>
                 <button 
                   onClick={() => setActiveTab("for")}
-                  className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all ${activeTab === "for" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
+                  className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all flex items-center justify-center gap-2 ${activeTab === "for" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
                 >
-                  👥 Who is it For
+                  <Users className="w-4 h-4" /> Who is it For
                 </button>
                 <button 
                   onClick={() => setActiveTab("highlights")}
-                  className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all ${activeTab === "highlights" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
+                  className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all flex items-center justify-center gap-2 ${activeTab === "highlights" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
                 >
-                  🚀 Course Highlights
+                  <Award className="w-4 h-4" /> Course Highlights
                 </button>
               </div>
 
@@ -504,38 +673,38 @@ export default function Home() {
                 
                 {activeTab === "learn" && (
                   <div className="flex flex-col gap-6">
-                    <h4 className="text-lg font-black text-brand-slate">Comprehensive Detailing Syllabus</h4>
+                    <h4 className="text-lg font-black font-heading text-brand-slate">Comprehensive Detailing Syllabus</h4>
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="p-4 rounded-xl bg-slate-50 flex items-start gap-3">
-                        <span className="text-brand-blue text-lg">📁</span>
+                        <BookOpen className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <h5 className="font-bold text-gray-800 text-sm">BIM Basics</h5>
                           <p className="text-xs text-gray-500 mt-1">Fundamentals of Building Information Modeling and collaborative workflow.</p>
                         </div>
                       </div>
                       <div className="p-4 rounded-xl bg-slate-50 flex items-start gap-3">
-                        <span className="text-brand-blue text-lg">⚙️</span>
+                        <HelpCircle className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <h5 className="font-bold text-gray-800 text-sm">Interface Mastery</h5>
                           <p className="text-xs text-gray-500 mt-1">Mastering the workspace grid, menus, shortcuts, and configurations.</p>
                         </div>
                       </div>
                       <div className="p-4 rounded-xl bg-slate-50 flex items-start gap-3">
-                        <span className="text-brand-blue text-lg">🏗️</span>
+                        <HardHat className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <h5 className="font-bold text-gray-800 text-sm">3D Model Creation</h5>
                           <p className="text-xs text-gray-500 mt-1">Creating parametric columns, beams, plates, and connections.</p>
                         </div>
                       </div>
                       <div className="p-4 rounded-xl bg-slate-50 flex items-start gap-3">
-                        <span className="text-brand-blue text-lg">📐</span>
+                        <FileText className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <h5 className="font-bold text-gray-800 text-sm">Steel Detailing Techniques</h5>
                           <p className="text-xs text-gray-500 mt-1">Generating precise assembly, single-part, and erection drawings.</p>
                         </div>
                       </div>
                       <div className="p-4 rounded-xl bg-slate-50 flex items-start gap-3 col-span-2">
-                        <span className="text-brand-blue text-lg">📊</span>
+                        <Briefcase className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <h5 className="font-bold text-gray-800 text-sm">Reporting &amp; Documentation</h5>
                           <p className="text-xs text-gray-500 mt-1">Creating bills of materials (BOM), NC files, fabrication reports, and exporting designs.</p>
@@ -547,24 +716,24 @@ export default function Home() {
 
                 {activeTab === "for" && (
                   <div className="flex flex-col gap-6">
-                    <h4 className="text-lg font-black text-brand-slate">Target Participants</h4>
+                    <h4 className="text-lg font-black font-heading text-brand-slate">Target Participants</h4>
                     <ul className="flex flex-col gap-4">
                       <li className="flex gap-3 items-start">
-                        <span className="w-5 h-5 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center text-xs font-bold mt-1">✓</span>
+                        <CheckCircle2 className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <strong className="text-gray-800 text-sm block">Aspiring Structural Engineers &amp; Detailers</strong>
                           <span className="text-xs text-gray-500">Kickstart a highly profitable career path in international steel detailing.</span>
                         </div>
                       </li>
                       <li className="flex gap-3 items-start">
-                        <span className="w-5 h-5 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center text-xs font-bold mt-1">✓</span>
+                        <CheckCircle2 className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <strong className="text-gray-800 text-sm block">CAD Technicians &amp; Draftsmen</strong>
                           <span className="text-xs text-gray-500">Upgrade your skillset from standard 2D drafting to premium 3D BIM modeling.</span>
                         </div>
                       </li>
                       <li className="flex gap-3 items-start">
-                        <span className="w-5 h-5 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center text-xs font-bold mt-1">✓</span>
+                        <CheckCircle2 className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
                         <div>
                           <strong className="text-gray-800 text-sm block">Civil Engineering Students &amp; Graduates</strong>
                           <span className="text-xs text-gray-500">Bridge the gap between theoretical college syllabi and real construction environments.</span>
@@ -576,34 +745,34 @@ export default function Home() {
 
                 {activeTab === "highlights" && (
                   <div className="flex flex-col gap-6">
-                    <h4 className="text-lg font-black text-brand-slate">Core Features of Tekera Training</h4>
+                    <h4 className="text-lg font-black font-heading text-brand-slate">Core Features of Tekera Training</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
                       <div className="flex items-center gap-2">
-                        <span className="text-green-500 text-lg">✔</span> Hands-on project-based portfolio
+                        <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Hands-on project-based portfolio
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-green-500 text-lg">✔</span> Expert mentors from live industry structures
+                        <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Expert mentors from live industry structures
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-green-500 text-lg">✔</span> Official Tekla Structures licenses used
+                        <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Official Tekla Structures licenses used
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-green-500 text-lg">✔</span> Internationally recognized certificate
+                        <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Internationally recognized certificate
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-green-500 text-lg">✔</span> Resume tuning &amp; placement connections
+                        <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Resume tuning &amp; placement connections
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-green-500 text-lg">✔</span> Lifetime technical forum access
+                        <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Lifetime technical forum access
                       </div>
                     </div>
                   </div>
                 )}
 
                 <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between flex-wrap gap-4">
-                  <span className="text-xs text-gray-500">💡 Weekday and Weekend batches are customizable upon request.</span>
-                  <a href="#enroll" className="text-brand-blue font-extrabold text-sm hover:underline flex items-center gap-1">
-                    Book a Free Demo Slot <span>→</span>
+                  <span className="text-xs text-gray-500">Weekday and Weekend batches are customizable upon request.</span>
+                  <a href="#enroll" className="text-brand-blue font-extrabold text-sm hover:underline flex items-center gap-1 group">
+                    Book a Free Demo Slot <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </div>
 
@@ -617,11 +786,11 @@ export default function Home() {
       </section>
 
       {/* Corporate Partnerships Section */}
-      <section id="corporate" className="py-20 lg:py-28 bg-white scroll-mt-20">
+      <section id="corporate" className="py-20 lg:py-28 bg-white scroll-mt-20 font-sans">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-4" data-aos="fade-up">
-            <span className="text-brand-blue font-extrabold text-sm uppercase tracking-widest">Corporate</span>
-            <h2 className="text-3xl md:text-4xl font-black text-brand-slate tracking-tight">
+            <span className="text-brand-blue font-bold text-sm uppercase tracking-widest">Corporate</span>
+            <h2 className="text-3xl md:text-4xl font-black font-heading text-brand-slate tracking-tight">
               Training &amp; Industry Partnerships
             </h2>
             <p className="text-gray-600">
@@ -632,11 +801,11 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Corp Item 1 */}
             <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100 flex items-start gap-4" data-aos="fade-right" data-aos-delay="100">
-              <div className="font-extrabold text-2xl text-brand-blue bg-white w-10 h-10 rounded-lg flex items-center justify-center shadow-sm">
+              <div className="font-extrabold text-2xl font-heading text-brand-blue bg-white w-12 h-12 rounded-xl flex items-center justify-center shadow-sm shrink-0">
                 01
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="font-bold text-gray-800 text-lg">Tailored Training Programs</h3>
+                <h3 className="font-bold font-heading text-gray-800 text-lg">Tailored Training Programs</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   We design custom syllabi based exactly on your current project requirements, ensuring immediate ROI for steel modeling and connections.
                 </p>
@@ -645,11 +814,11 @@ export default function Home() {
 
             {/* Corp Item 2 */}
             <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100 flex items-start gap-4" data-aos="fade-left" data-aos-delay="100">
-              <div className="font-extrabold text-2xl text-brand-blue bg-white w-10 h-10 rounded-lg flex items-center justify-center shadow-sm">
+              <div className="font-extrabold text-2xl font-heading text-brand-blue bg-white w-12 h-12 rounded-xl flex items-center justify-center shadow-sm shrink-0">
                 02
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="font-bold text-gray-800 text-lg">Hands-on Learning Approach</h3>
+                <h3 className="font-bold font-heading text-gray-800 text-lg">Hands-on Learning Approach</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   Practical, project-based training on live structures ensures your engineers can handle complex joints, columns, and NC files smoothly.
                 </p>
@@ -658,11 +827,11 @@ export default function Home() {
 
             {/* Corp Item 3 */}
             <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100 flex items-start gap-4" data-aos="fade-right" data-aos-delay="200">
-              <div className="font-extrabold text-2xl text-brand-blue bg-white w-10 h-10 rounded-lg flex items-center justify-center shadow-sm">
+              <div className="font-extrabold text-2xl font-heading text-brand-blue bg-white w-12 h-12 rounded-xl flex items-center justify-center shadow-sm shrink-0">
                 03
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="font-bold text-gray-800 text-lg">Flexible Delivery Options</h3>
+                <h3 className="font-bold font-heading text-gray-800 text-lg">Flexible Delivery Options</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   Choose between certified on-site instruction at your office, fully virtual mentoring, or a convenient hybrid structure.
                 </p>
@@ -671,29 +840,40 @@ export default function Home() {
 
             {/* Corp Item 4 */}
             <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100 flex items-start gap-4" data-aos="fade-left" data-aos-delay="200">
-              <div className="font-extrabold text-2xl text-brand-blue bg-white w-10 h-10 rounded-lg flex items-center justify-center shadow-sm">
+              <div className="font-extrabold text-2xl font-heading text-brand-blue bg-white w-12 h-12 rounded-xl flex items-center justify-center shadow-sm shrink-0">
                 04
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="font-bold text-gray-800 text-lg">Certification &amp; Skills</h3>
+                <h3 className="font-bold font-heading text-gray-800 text-lg">Certification &amp; Skills</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   Upskilled employees receive industry-recognized credentials, increasing your company's bid strength for international structural projects.
                 </p>
               </div>
             </div>
           </div>
+
+          {/* Corporate CTA Button */}
+          <div className="text-center mt-12" data-aos="fade-up">
+            <a 
+              href="#enroll" 
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-base shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/35 transition-all duration-200 transform hover:-translate-y-0.5"
+            >
+              <span>Enquire for Corporate Training</span>
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 lg:py-28 bg-brand-slate text-white scroll-mt-20">
+      <section id="testimonials" className="py-20 lg:py-28 bg-brand-slate text-white scroll-mt-20 font-sans">
         <div className="max-w-5xl mx-auto px-6" data-aos="fade-up">
           <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-4">
-            <span className="text-brand-yellow font-extrabold text-sm uppercase tracking-widest">Student Reviews</span>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-white">
+            <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">Student Reviews</span>
+            <h2 className="text-3xl md:text-4xl font-black font-heading tracking-tight text-white">
               Student Success Stories
             </h2>
-            <p className="text-gray-400">
+            <p className="text-gray-400 font-sans">
               Read how hands-on training at Tekera transformed these students into professional modelers.
             </p>
           </div>
@@ -708,19 +888,24 @@ export default function Home() {
 
             <div className="flex flex-col gap-6 relative z-10">
               <span className="text-brand-yellow font-bold text-xs uppercase tracking-widest">
-                📍 Placed at {testimonials[testimonialIdx].company}
+                Placed at {testimonials[testimonialIdx].company}
               </span>
-              <h3 className="text-xl lg:text-2xl font-extrabold text-white leading-snug">
+              <h3 className="text-xl lg:text-2xl font-extrabold font-heading text-white leading-snug">
                 "{testimonials[testimonialIdx].title}"
               </h3>
               <p className="text-gray-300 text-base leading-relaxed italic">
                 {testimonials[testimonialIdx].content}
               </p>
               
-              <div className="border-t border-white/10 pt-6 flex items-center justify-between">
-                <div>
-                  <h4 className="font-extrabold text-white text-base">{testimonials[testimonialIdx].student}</h4>
-                  <p className="text-xs text-brand-yellow font-semibold">{testimonials[testimonialIdx].role}</p>
+              <div className="border-t border-white/10 pt-6 flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center border-2 border-brand-yellow shrink-0 text-brand-yellow">
+                    <User className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h4 className="font-extrabold text-white text-base font-heading">{testimonials[testimonialIdx].student}</h4>
+                    <p className="text-xs text-brand-yellow font-semibold">{testimonials[testimonialIdx].role}</p>
+                  </div>
                 </div>
 
                 {/* Left/Right Buttons */}
@@ -730,14 +915,14 @@ export default function Home() {
                     className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
                     aria-label="Previous review"
                   >
-                    ←
+                    <ChevronLeft className="w-5 h-5 text-white" />
                   </button>
                   <button 
                     onClick={nextTestimonial}
                     className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
                     aria-label="Next review"
                   >
-                    →
+                    <ChevronRight className="w-5 h-5 text-white" />
                   </button>
                 </div>
               </div>
@@ -760,11 +945,11 @@ export default function Home() {
       </section>
 
       {/* FAQ Accordion Section */}
-      <section id="faqs" className="py-20 lg:py-28 bg-white scroll-mt-20">
+      <section id="faqs" className="py-20 lg:py-28 bg-white scroll-mt-20 font-sans">
         <div className="max-w-4xl mx-auto px-6" data-aos="fade-up">
           <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-4">
-            <span className="text-brand-blue font-extrabold text-sm uppercase tracking-widest">Support</span>
-            <h2 className="text-3xl md:text-4xl font-black text-brand-slate tracking-tight">
+            <span className="text-brand-blue font-bold text-sm uppercase tracking-widest">Support</span>
+            <h2 className="text-3xl md:text-4xl font-black font-heading text-brand-slate tracking-tight">
               Frequently Asked Questions
             </h2>
             <p className="text-gray-600">
@@ -782,14 +967,14 @@ export default function Home() {
                   onClick={() => setFaqOpen(faqOpen === index ? null : index)}
                   className="w-full text-left p-6 flex justify-between items-center font-bold text-gray-800 hover:text-brand-blue transition-colors gap-4"
                 >
-                  <span>{faq.question}</span>
-                  <span className="text-lg text-brand-blue">
-                    {faqOpen === index ? "−" : "+"}
+                  <span className="font-heading">{faq.question}</span>
+                  <span className="text-brand-blue shrink-0">
+                    {faqOpen === index ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                   </span>
                 </button>
                 
                 {faqOpen === index && (
-                  <div className="px-6 pb-6 text-sm text-gray-600 leading-relaxed border-t border-gray-100/50 pt-4 bg-white">
+                  <div className="px-6 pb-6 text-sm text-gray-600 leading-relaxed border-t border-gray-100/50 pt-4 bg-white font-sans">
                     {faq.answer}
                   </div>
                 )}
@@ -800,7 +985,7 @@ export default function Home() {
       </section>
 
       {/* Lead Generation & Contact Form Section */}
-      <section id="enroll" className="py-20 lg:py-28 bg-gradient-to-tr from-brand-blue to-brand-blue-dark text-white relative overflow-hidden scroll-mt-20">
+      <section id="enroll" className="py-20 lg:py-28 bg-gradient-to-tr from-brand-blue to-brand-blue-dark text-white relative overflow-hidden scroll-mt-20 font-sans">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -809,26 +994,37 @@ export default function Home() {
             {/* Form Details Copy */}
             <div className="lg:col-span-6 flex flex-col gap-6" data-aos="fade-right">
               <span className="text-brand-yellow font-extrabold text-sm uppercase tracking-widest">Enrol Now</span>
-              <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">
+              <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tight leading-tight">
                 You Could Be Next!
               </h2>
-              <p className="text-lg text-blue-100 leading-relaxed">
+              <p className="text-lg text-blue-100 leading-relaxed font-sans">
                 With over 180+ successful placements, Tekera continues to empower civil engineers, draftsmen, and graduates to build highly rewarding international careers in Tekla Modeling and Structural Detailing.
               </p>
               
-              <div className="flex flex-col gap-4 mt-4">
+              <div className="flex flex-col gap-4 mt-2">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-brand-yellow/20 flex items-center justify-center text-brand-yellow">✓</span>
+                  <CheckCircle2 className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
                   <span className="text-sm font-semibold">Free Career Mentorship Consultation</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-brand-yellow/20 flex items-center justify-center text-brand-yellow">✓</span>
+                  <CheckCircle2 className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
                   <span className="text-sm font-semibold">Customized Placement Roadmaps</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-brand-yellow/20 flex items-center justify-center text-brand-yellow">✓</span>
+                  <CheckCircle2 className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
                   <span className="text-sm font-semibold">1-on-1 Guidance with Industry Experts</span>
                 </div>
+              </div>
+
+              {/* Google Maps Embed for Physical Location */}
+              <div className="w-full h-56 rounded-2xl overflow-hidden shadow-inner border border-blue-400/20 mt-4">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.7618991391986!2d78.68603681480097!3d10.829562992285497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf502bdfbfca5%3A0xe543e3d9396dc7db!2s7th%20Cross%20Rd%20E%2C%20Thillai%20Nagar%2C%20Tiruchirappalli%2C%20Tamil%20Nadu%20620018!5e0!3m2!1sen!2sin!4v1658145612345!5m2!1sen!2sin"
+                  className="w-full h-full border-0"
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
 
@@ -841,7 +1037,7 @@ export default function Home() {
                     <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-3xl font-black animate-bounce">
                       ✓
                     </div>
-                    <h3 className="text-2xl font-black text-brand-slate">Enrollment Request Received!</h3>
+                    <h3 className="text-2xl font-black font-heading text-brand-slate">Enrollment Request Received!</h3>
                     <p className="text-gray-500 text-sm max-w-sm">
                       Thank you for submitting your details. Our admissions advisor will contact you on your phone number within the next 24 hours to schedule your career consultation slot.
                     </p>
@@ -849,7 +1045,7 @@ export default function Home() {
                 ) : (
                   <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     <div>
-                      <h3 className="text-2xl font-black text-brand-slate">Book a Free Session</h3>
+                      <h3 className="text-2xl font-black font-heading text-brand-slate">Book a Free Session</h3>
                       <p className="text-xs text-gray-400 mt-1">Fill out the form below to secure your counseling slot.</p>
                     </div>
 
@@ -862,7 +1058,7 @@ export default function Home() {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        placeholder="John Doe"
+                        placeholder="e.g. Arun Kumar"
                         className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-blue focus:bg-white text-sm text-gray-800 transition-colors"
                       />
                     </div>
@@ -891,7 +1087,7 @@ export default function Home() {
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          placeholder="+91 98765 43210"
+                          placeholder="+91 86672 99312"
                           className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-blue focus:bg-white text-sm text-gray-800 transition-colors"
                         />
                       </div>
@@ -928,12 +1124,38 @@ export default function Home() {
 
                     <button 
                       type="submit"
-                      className="mt-2 w-full py-4 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold rounded-xl text-center shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/35 transition-all duration-200 transform hover:-translate-y-0.5"
+                      className="mt-2 w-full py-4 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold rounded-xl text-center shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/35 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 font-heading"
                     >
-                      Enrol / Book Call Now
+                      <span>Enrol / Book Call Now</span>
+                      <ArrowRight className="w-5 h-5" />
                     </button>
                   </form>
                 )}
+
+                {/* Direct quick contact links below form */}
+                <div className="mt-6 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="text-xs text-gray-400 font-semibold uppercase tracking-wider text-center sm:text-left">
+                    Prefer direct contact?
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <a 
+                      href="tel:+918667299312" 
+                      className="px-4 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold text-xs flex items-center gap-2 border border-gray-200 transition-colors"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-brand-blue" />
+                      <span>Call Us</span>
+                    </a>
+                    <a 
+                      href="https://wa.me/918667299312" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 rounded-lg bg-green-50 hover:bg-green-100 text-green-700 font-bold text-xs flex items-center gap-2 border border-green-200 transition-colors"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5 text-green-600" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -943,28 +1165,43 @@ export default function Home() {
       </section>
 
       {/* Footer Section */}
-      <footer className="bg-brand-slate text-white pt-16 pb-8 border-t border-white/5">
+      <footer className="bg-brand-slate text-white pt-16 pb-8 border-t border-white/5 font-sans">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
             
-            {/* Brand details */}
+            {/* Brand details and logo */}
             <div className="lg:col-span-5 flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <img 
-                  src="/logo.svg" 
+                  src="/Tek_Logo.png" 
                   alt="TeKeRa Training Center Logo" 
-                  className="h-14 w-auto object-contain brightness-0 invert" 
+                  className="h-16 w-auto object-contain bg-white rounded-2xl px-4 py-2 shadow-md" 
                 />
               </div>
-              <p className="text-sm text-gray-400 max-w-sm leading-relaxed">
+              <p className="text-sm text-gray-400 max-w-sm leading-relaxed font-sans">
                 Authorized Tekla Structures Training Center in Tamil Nadu. Started in 2018, we have trained and successfully placed more than 180+ expert modelers across top global construction design firms.
               </p>
+              {/* Social links */}
+              <div className="flex items-center gap-4 mt-4">
+                <a href="https://www.instagram.com/tekera_training" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-slate transition-all" aria-label="Instagram">
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a href="https://linkedin.com/company/tekera-training" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-slate transition-all" aria-label="LinkedIn">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a href="https://youtube.com/@tekera_training" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-slate transition-all" aria-label="YouTube">
+                  <Youtube className="w-4 h-4" />
+                </a>
+                <a href="https://wa.me/918667299312" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-slate transition-all" aria-label="WhatsApp">
+                  <MessageSquare className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
             {/* Navigation links */}
             <div className="lg:col-span-3 flex flex-col gap-4">
-              <h4 className="font-extrabold text-sm uppercase tracking-widest text-brand-yellow">Quick Links</h4>
-              <nav className="flex flex-col gap-2.5 text-sm text-gray-400">
+              <h4 className="font-extrabold font-heading text-sm uppercase tracking-widest text-brand-yellow">Quick Links</h4>
+              <nav className="flex flex-col gap-2.5 text-sm text-gray-400 font-sans">
                 <a href="#why-choose-us" className="hover:text-white transition-colors duration-200">Why Us</a>
                 <a href="#course" className="hover:text-white transition-colors duration-200">Our Courses</a>
                 <a href="#corporate" className="hover:text-white transition-colors duration-200">Corporate Program</a>
@@ -975,24 +1212,38 @@ export default function Home() {
 
             {/* Contact details */}
             <div className="lg:col-span-4 flex flex-col gap-4">
-              <h4 className="font-extrabold text-sm uppercase tracking-widest text-brand-yellow">Contact Information</h4>
-              <ul className="flex flex-col gap-2.5 text-sm text-gray-400">
-                <li className="flex items-center gap-2">
-                  <span>📍</span> Tamil Nadu, India
+              <h4 className="font-extrabold font-heading text-sm uppercase tracking-widest text-brand-yellow">Contact Information</h4>
+              <ul className="flex flex-col gap-3.5 text-sm text-gray-400 font-sans">
+                <li className="flex items-start gap-2.5">
+                  <MapPin className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
+                  <a 
+                    href="https://maps.google.com/?q=No.302,+D-1,+7th+Cross+Road+East,+Thillai+Nagar,+Tiruchirappalli,+Tamil+Nadu+620018" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-white transition-colors leading-relaxed"
+                  >
+                    No.302, D-1, 7th Cross Road East, Thillai Nagar, Tiruchirappalli, Tamil Nadu 620018
+                  </a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span>📧</span> info@tekera.in
+                <li className="flex items-center gap-2.5">
+                  <Phone className="w-5 h-5 text-brand-yellow shrink-0" />
+                  <a href="tel:+918667299312" className="hover:text-white transition-colors">+91 86672 99312</a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span>🌐</span> http://tekera.in
+                <li className="flex items-center gap-2.5">
+                  <Mail className="w-5 h-5 text-brand-yellow shrink-0" />
+                  <a href="mailto:info@tekera.in" className="hover:text-white transition-colors">info@tekera.in</a>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Globe className="w-5 h-5 text-brand-yellow shrink-0" />
+                  <a href="https://www.tekera.in" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">www.tekera.in</a>
                 </li>
               </ul>
             </div>
 
           </div>
 
-          <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-            <p>© {new Date().getFullYear()} Tekera. All rights reserved.</p>
+          <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500 font-sans">
+            <p>© {new Date().getFullYear()} Tekera Training Center. All rights reserved. · Let's Create History.</p>
             <p>Accredited Tekla Structures Vocational Partner</p>
           </div>
         </div>

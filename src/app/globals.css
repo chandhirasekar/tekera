@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap');
 
 @import "tailwindcss";
 
 
 @theme {
-  --font-sans: 'Outfit', var(--font-geist-sans), sans-serif;
+  --font-sans: 'Inter', var(--font-geist-sans), sans-serif;
+  --font-heading: 'Poppins', sans-serif;
   --color-brand-blue: #0f62ac;
   --color-brand-blue-dark: #0c4e8a;
   --color-brand-yellow: #ffc63c;
   --color-brand-yellow-dark: #e5b230;
   --color-brand-slate: #292929;
   
-  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee: marquee 45s linear infinite;
   
   @keyframes marquee {
     0% {
@@ -35,7 +36,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Custom styles for animations and premium effects */
