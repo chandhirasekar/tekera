@@ -209,7 +209,7 @@ export default function Home() {
             Accept: "application/json"
           },
           body: JSON.stringify({
-            access_key: "YOUR_ACCESS_KEY_HERE", 
+            access_key: "c82cc07d-1ef4-44b1-9657-2cbed9d859ac", 
             name: formData.name,
             email: formData.email,
             phone: formData.phone,
@@ -571,19 +571,20 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             {/* Main Video Player */}
-            <div className="lg:col-span-8 bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 flex flex-col justify-between relative min-h-[300px] sm:min-h-[400px]">
+            <div className="lg:col-span-8 bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 flex flex-col relative">
               <video 
                 key={selectedVideo.id}
                 src={`${selectedVideo.src}?v=1.1`}
-                className="w-full h-full object-contain aspect-video"
+                className="w-full object-contain aspect-video"
                 controls
-                autoPlay={false}
+                autoPlay={true}
               >
                 Your browser does not support the video tag.
               </video>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-6 pointer-events-none">
+              {/* High-contrast name and course placement details caption bar below the video screen */}
+              <div className="bg-slate-950 p-6 border-t border-slate-800">
                 <h4 className="text-white font-bold text-lg font-heading">{selectedVideo.student}</h4>
-                <p className="text-brand-yellow text-sm font-semibold">{selectedVideo.role}</p>
+                <p className="text-brand-yellow text-sm font-semibold mt-1">{selectedVideo.role}</p>
               </div>
             </div>
 
