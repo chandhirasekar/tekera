@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: "Tekera | Authorized Tekla Training Center in Tamil Nadu",
   description: "Achieve a successful career as a Tekla Structures expert by training at the Tekera Training Center, where we assist you to secure a valuable job placement. Over 180+ placements.",
   keywords: ["Tekla training Tamil Nadu", "Tekla Structures course", "structural steel detailing training", "BIM modeler courses", "Tekla certification India"],
+  icons: {
+    icon: "/Tek_Logo.png",
+    shortcut: "/Tek_Logo.png",
+    apple: "/Tek_Logo.png",
+  },
   openGraph: {
     title: "Tekera | Authorized Tekla Training Center in Tamil Nadu",
     description: "Achieve a successful career as a Tekla Structures expert by training at the Tekera Training Center, where we assist you to secure a valuable job placement. Over 180+ placements.",

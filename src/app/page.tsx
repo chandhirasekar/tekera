@@ -3,20 +3,20 @@
 import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { 
-  Award, 
-  Users, 
+import {
+  Award,
+  Users,
   User,
-  FileText, 
-  Briefcase, 
-  HardHat, 
-  Phone, 
-  Mail, 
-  Globe, 
-  MapPin, 
-  ChevronLeft, 
-  ChevronRight, 
-  CheckCircle2, 
+  FileText,
+  Briefcase,
+  HardHat,
+  Phone,
+  Mail,
+  Globe,
+  MapPin,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
   MessageSquare,
   Plus,
   Minus,
@@ -61,7 +61,7 @@ const testimonials = [
     company: "3DE Global",
     role: "Tekla Modeler",
     content: "Before joining Tekera, I had no experience in Tekla Structures. The hands-on training and real-world projects gave me the confidence to master the software. Thanks to the placement support, I secured a job at 3DE Global as a Tekla Modeler. I highly recommend Tekera for anyone serious about a career in BIM and structural detailing!",
-    student: "Arun Kumar",
+    student: "Ashwin",
     image: "/images/testimonials/arun.jpg"
   },
   {
@@ -70,25 +70,25 @@ const testimonials = [
     company: "Esskay Structures",
     role: "Steel Detailer",
     content: "Coming from a CAD background, I wanted to upskill in Tekla Structures to improve my job prospects. The expert instructors at Tekera made learning easy, and the placement team ensured I landed a role at Esskay Structures. I am now working on large-scale structural projects, all thanks to Tekera's training and mentorship!",
-    student: "Priya Dharshini",
+    student: "Azhar",
     image: "/images/testimonials/priya.jpg"
   },
   {
     id: 703,
     title: "International Placement Achieved!",
     company: "E2G Engineering Services",
-    role: "Sr. BIM Engineer (UAE)",
+    role: "BIM Engineer",
     content: "Tekera not only gave me the technical skills but also prepared me for interviews and workplace challenges. I started my career at E2G Engineering Services, and within a year, I was offered an opportunity in UAE. The training here truly opens global doors!",
-    student: "Mohamed Riaz",
+    student: "Santhosh",
     image: "/images/testimonials/riaz.jpg"
   },
   {
     id: 704,
     title: "Hands-on Training That Made a Difference!",
     company: "Hi-Q Engineering",
-    role: "Tekla Detailer",
+    role: "Kelly steel (Dubai)",
     content: "What sets Tekera apart is their real-world approach to learning. We didn’t just study tools—we worked on live projects, making it easy to adapt to industry workflows. Thanks to their placement assistance, I secured a position at Hi-Q Engineering, where I now work on high-rise structures and industrial projects.",
-    student: "Sanjay Balaji",
+    student: "Chittrarasu",
     image: "/images/testimonials/sanjay.jpg"
   }
 ];
@@ -121,40 +121,53 @@ const faqs = [
 const studentVideos = [
   {
     id: 1,
-    student: "Arun Kumar",
+    student: "Ashwin",
     role: "Tekla Modeler at 3DE Global",
     src: "/videos/VID_20260718_051250_346.mp4",
     duration: "Testimonial"
   },
   {
     id: 2,
-    student: "Priya Dharshini",
+    student: "Azhar",
     role: "Steel Detailer at Esskay Structures",
     src: "/videos/VID_20260718_051255_884.mp4",
     duration: "Testimonial"
   },
   {
     id: 3,
-    student: "Mohamed Riaz",
-    role: "Sr. BIM Engineer (UAE) at E2G",
+    student: "Santhosh",
+    role: "BIM Engineer",
     src: "/videos/VID_20260718_051301_758.mp4",
     duration: "Testimonial"
   },
   {
     id: 4,
-    student: "Sanjay Balaji",
-    role: "Tekla Detailer at Hi-Q Engineering",
+    student: "Chittrarasu",
+    role: "Kelly steel (Dubai)",
     src: "/videos/VID_20260718_051316_435.mp4",
     duration: "Testimonial"
   }
 ];
 
 const partners = [
-  "3DE Global", "Esskay Structures", "E2G Engineering", "Hi-Q", 
-  "Gen Engineering", "Edanbrook", "Fidelis", "AISD Engineering", 
-  "Cistron Infotek", "Unicrest Engineering", "4D Detailing", 
-  "Duinz Engineering", "Strutech", "ASD Engineering", 
-  "Caldim Engineering", "Eversendai", "DGS", "Pangulf", "3DE Global"
+  { name: "3DE Global", image: "/partner/3De-Logo-HD-01.jpg" },
+  { name: "Esskay Structures", image: "/partner/Esskay_Structures.png" },
+  { name: "E2G Engineering", image: "/partner/E2G.png" },
+  { name: "Hi-Q", image: "" },
+  { name: "Gen Engineering", image: "/partner/Gen_Eng.jpg" },
+  { name: "Edanbrook", image: "/partner/Edanbrook.png" },
+  { name: "Fidelis", image: "/partner/Fidelis.png" },
+  { name: "AISD Engineering", image: "" },
+  { name: "Cistron Infotek", image: "" },
+  { name: "Unicrest Engineering", image: "" },
+  { name: "4D Detailing", image: "" },
+  { name: "Duinz Engineering", image: "/partner/Duinz_Eng.svg" },
+  { name: "Strutech", image: "/partner/Strutech.png" },
+  { name: "ASD Engineering", image: "/partner/ASD_Engi.webp" },
+  { name: "Caldim Engineering", image: "/partner/Caldim_Eng.png" },
+  { name: "Eversendai", image: "" },
+  { name: "DGS", image: "" },
+  { name: "Pangulf", image: "" }
 ];
 
 export default function Home() {
@@ -168,7 +181,7 @@ export default function Home() {
     name: "",
     email: "",
     phone: "",
-    timing: "Full-Time",
+    timing: "Part-Time Morning",
     message: ""
   });
 
@@ -198,7 +211,7 @@ export default function Home() {
     e.preventDefault();
     if (formData.name && formData.email && formData.phone) {
       setFormSubmitted(true);
-      
+
       try {
         // Submit details directly to Web3Forms API to deliver leads to email
         // Note: Replace "YOUR_ACCESS_KEY_HERE" with a free access key from https://web3forms.com/
@@ -209,7 +222,7 @@ export default function Home() {
             Accept: "application/json"
           },
           body: JSON.stringify({
-            access_key: "c82cc07d-1ef4-44b1-9657-2cbed9d859ac", 
+            access_key: "c82cc07d-1ef4-44b1-9657-2cbed9d859ac",
             name: formData.name,
             email: formData.email,
             phone: formData.phone,
@@ -218,7 +231,7 @@ export default function Home() {
             subject: "New Student Enrollment Lead - Tekera Training Center"
           })
         });
-        
+
         // Also open WhatsApp in parallel for instant client chat action
         const whatsappText = `Hi Tekera, I am interested in enrolling for the course. Here are my details:
 - Name: ${formData.name}
@@ -226,8 +239,8 @@ export default function Home() {
 - Phone: ${formData.phone}
 - Preferred Timing: ${formData.timing}
 - Message: ${formData.message || "N/A"}`;
-        
-        const whatsappUrl = `https://wa.me/918667299312?text=${encodeURIComponent(whatsappText)}`;
+
+        const whatsappUrl = `https://wa.me/918608719878?text=${encodeURIComponent(whatsappText)}`;
         window.open(whatsappUrl, "_blank");
       } catch (error) {
         console.error("Error submitting form", error);
@@ -239,7 +252,7 @@ export default function Home() {
           name: "",
           email: "",
           phone: "",
-          timing: "Full-Time",
+          timing: "Part-Time Morning",
           message: ""
         });
       }, 5000);
@@ -248,14 +261,14 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 overflow-x-hidden font-sans">
-      
+
       {/* Sticky Blurred Navigation Bar */}
       <header className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3 group">
-            <img 
-              src="/Tek_Logo.png" 
-              alt="TeKeRa Training Center Logo" 
+            <img
+              src="/Tek_Logo.png"
+              alt="TeKeRa Training Center Logo"
               className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </a>
@@ -270,15 +283,15 @@ export default function Home() {
           </nav>
 
           <div className="hidden md:flex items-center gap-6">
-            <a 
-              href="tel:+918667299312" 
+            <a
+              href="tel:+918608719878"
               className="flex items-center gap-2 text-sm font-bold text-brand-blue hover:text-brand-blue-dark transition-colors font-sans"
             >
               <Phone className="w-4 h-4 text-brand-yellow-dark" />
-              <span>+91 86672 99312</span>
+              <span>+91 86087 19878</span>
             </a>
-            <a 
-              href="#enroll" 
+            <a
+              href="#enroll"
               className="px-6 py-2.5 rounded-full bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold text-sm shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/30 transition-all duration-200 transform hover:-translate-y-0.5"
             >
               Enrol Now
@@ -286,7 +299,7 @@ export default function Home() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
             aria-label="Toggle menu"
@@ -304,51 +317,51 @@ export default function Home() {
         {/* Mobile Navigation Dropdown */}
         {mobileMenuOpen && (
           <div className="md:hidden w-full bg-white border-b border-gray-100 py-4 px-6 flex flex-col gap-4 shadow-xl">
-            <a 
-              href="#why-choose-us" 
+            <a
+              href="#why-choose-us"
               onClick={() => setMobileMenuOpen(false)}
               className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               Why Choose Us
             </a>
-            <a 
-              href="#course" 
+            <a
+              href="#course"
               onClick={() => setMobileMenuOpen(false)}
               className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               Our Courses
             </a>
-            <a 
-              href="#corporate" 
+            <a
+              href="#corporate"
               onClick={() => setMobileMenuOpen(false)}
               className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               Corporate Partnerships
             </a>
-            <a 
-              href="#testimonials" 
+            <a
+              href="#testimonials"
               onClick={() => setMobileMenuOpen(false)}
               className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               Success Stories
             </a>
-            <a 
-              href="#faqs" 
+            <a
+              href="#faqs"
               onClick={() => setMobileMenuOpen(false)}
               className="font-semibold text-gray-700 py-2 border-b border-gray-50 hover:text-brand-blue transition-colors"
             >
               FAQs
             </a>
-            <a 
-              href="tel:+918667299312"
+            <a
+              href="tel:+918608719878"
               onClick={() => setMobileMenuOpen(false)}
               className="font-bold text-brand-blue py-2 border-b border-gray-50 flex items-center gap-2"
             >
               <Phone className="w-4 h-4 text-brand-yellow-dark" />
-              Call: +91 86672 99312
+              Call: +91 86087 19878
             </a>
-            <a 
-              href="#enroll" 
+            <a
+              href="#enroll"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center py-3 rounded-xl bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold shadow-md block"
             >
@@ -368,7 +381,7 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Hero Left Content */}
             <div className="lg:col-span-7 flex flex-col items-start gap-6" data-aos="fade-right">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold tracking-wider text-brand-yellow uppercase" data-aos="fade-down" data-aos-delay="100">
@@ -380,16 +393,16 @@ export default function Home() {
               <p className="text-base md:text-lg text-blue-100/90 max-w-2xl leading-relaxed font-sans" data-aos="fade-up" data-aos-delay="300">
                 Bridge the gap between engineering theory and real structural steel detailing. Learn from active industry experts, build a professional portfolio, and secure high-value placements.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-4" data-aos="fade-up" data-aos-delay="400">
-                <a 
-                  href="#enroll" 
+                <a
+                  href="#enroll"
                   className="px-8 py-4 rounded-xl bg-brand-yellow text-brand-slate font-bold text-base shadow-lg shadow-brand-yellow/20 hover:shadow-brand-yellow/40 transition-all duration-200 text-center hover:bg-brand-yellow-dark transform hover:-translate-y-0.5"
                 >
                   Enrol Today
                 </a>
-                <a 
-                  href="#course" 
+                <a
+                  href="#course"
                   className="px-8 py-4 rounded-xl bg-transparent hover:bg-white/10 text-white font-semibold text-base border-2 border-white transition-all duration-200 text-center backdrop-blur-md transform hover:-translate-y-0.5"
                 >
                   Explore Course
@@ -446,11 +459,37 @@ export default function Home() {
           </p>
           <div className="relative w-full flex overflow-x-hidden">
             {/* Carousel loop */}
-            <div className="animate-marquee flex whitespace-nowrap gap-16 text-sm font-bold uppercase tracking-wider text-gray-400 select-none">
+            <div className="animate-marquee flex items-center whitespace-nowrap gap-16 select-none">
               {partners.map((partner, index) => (
-                <span key={index} className="hover:text-brand-blue transition-colors duration-200">
-                  {partner}
-                </span>
+                <div key={index} className="flex items-center justify-center h-12 grayscale contrast-75 hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
+                  {partner.image ? (
+                    <img
+                      src={partner.image}
+                      alt={partner.name}
+                      className="h-8 md:h-10 w-auto max-w-[140px] object-contain"
+                    />
+                  ) : (
+                    <span className="text-base font-extrabold tracking-wider text-gray-500 hover:text-brand-blue uppercase transition-colors">
+                      {partner.name}
+                    </span>
+                  )}
+                </div>
+              ))}
+              {/* Duplicate loop for seamless marquee effect */}
+              {partners.map((partner, index) => (
+                <div key={`dup-${index}`} className="flex items-center justify-center h-12 grayscale contrast-75 hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
+                  {partner.image ? (
+                    <img
+                      src={partner.image}
+                      alt={partner.name}
+                      className="h-8 md:h-10 w-auto max-w-[140px] object-contain"
+                    />
+                  ) : (
+                    <span className="text-base font-extrabold tracking-wider text-gray-500 hover:text-brand-blue uppercase transition-colors">
+                      {partner.name}
+                    </span>
+                  )}
+                </div>
               ))}
             </div>
           </div>
@@ -545,8 +584,8 @@ export default function Home() {
                   Join Tamil Nadu's top training cohort and get certified by the leading authorized detailing academy.
                 </p>
               </div>
-              <a 
-                href="#enroll" 
+              <a
+                href="#enroll"
                 className="mt-6 w-full py-3 bg-brand-yellow hover:bg-brand-yellow-dark text-brand-slate font-bold rounded-xl text-center shadow-md transition-colors"
               >
                 Apply Online Now
@@ -572,7 +611,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             {/* Main Video Player */}
             <div className="lg:col-span-8 bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 flex flex-col relative">
-              <video 
+              <video
                 key={selectedVideo.id}
                 src={`${selectedVideo.src}?v=1.1`}
                 className="w-full object-contain aspect-video"
@@ -596,15 +635,13 @@ export default function Home() {
                   <button
                     key={video.id}
                     onClick={() => setSelectedVideo(video)}
-                    className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-start gap-4 ${
-                      selectedVideo.id === video.id
-                        ? "bg-brand-blue/5 border-brand-blue/30 shadow-md"
-                        : "bg-gray-50 border-gray-100 hover:bg-gray-100/70"
-                    }`}
+                    className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-start gap-4 ${selectedVideo.id === video.id
+                      ? "bg-brand-blue/5 border-brand-blue/30 shadow-md"
+                      : "bg-gray-50 border-gray-100 hover:bg-gray-100/70"
+                      }`}
                   >
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                      selectedVideo.id === video.id ? "bg-brand-blue text-white" : "bg-brand-blue/10 text-brand-blue"
-                    }`}>
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${selectedVideo.id === video.id ? "bg-brand-blue text-white" : "bg-brand-blue/10 text-brand-blue"
+                      }`}>
                       <Users className="w-5 h-5" />
                     </div>
                     <div>
@@ -623,9 +660,9 @@ export default function Home() {
       {/* Course Overview & Timing Tabs Section */}
       <section id="course" className="py-20 lg:py-28 bg-gray-50 scroll-mt-20 font-sans">
         <div className="max-w-7xl mx-auto px-6">
-          
+
           <div className="grid lg:grid-cols-12 gap-12 items-start">
-            
+
             {/* Left Course Copy */}
             <div className="lg:col-span-5 flex flex-col gap-6" data-aos="fade-right">
               <span className="text-brand-blue font-bold text-sm uppercase tracking-widest">Our Courses & Timelines</span>
@@ -639,14 +676,14 @@ export default function Home() {
               {/* Timings Display Cards */}
               <div className="flex flex-col gap-4 mt-4 bg-white p-6 rounded-2xl border border-gray-100">
                 <h4 className="font-extrabold font-heading text-brand-slate text-lg border-b border-gray-100 pb-3">Available Timings</h4>
-                
-                <div className="flex items-start gap-4">
+
+                {/* <div className="flex items-start gap-4">
                   <div className="px-3 py-1 rounded bg-brand-blue/10 text-brand-blue text-xs font-black uppercase mt-1 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Full-Time</div>
                   <div>
                     <h5 className="font-bold text-gray-800 text-sm">Monday to Friday</h5>
                     <p className="text-xs text-gray-500">6-8 hours daily intensive classroom & practical projects.</p>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="flex items-start gap-4">
                   <div className="px-3 py-1 rounded bg-brand-yellow/20 text-brand-yellow-dark text-xs font-black uppercase mt-1 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Part-Time</div>
@@ -668,22 +705,22 @@ export default function Home() {
 
             {/* Right Interactive Tab Grid */}
             <div className="lg:col-span-7 flex flex-col gap-6" data-aos="fade-left">
-              
+
               {/* Tab Header buttons */}
               <div className="flex border-b border-gray-200">
-                <button 
+                <button
                   onClick={() => setActiveTab("learn")}
                   className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all flex items-center justify-center gap-2 ${activeTab === "learn" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
                 >
                   <BookOpen className="w-4 h-4" /> What You'll Learn
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab("for")}
                   className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all flex items-center justify-center gap-2 ${activeTab === "for" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
                 >
                   <Users className="w-4 h-4" /> Who is it For
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab("highlights")}
                   className={`flex-1 py-4 text-center font-bold text-sm tracking-wide border-b-2 transition-all flex items-center justify-center gap-2 ${activeTab === "highlights" ? "border-brand-blue text-brand-blue" : "border-transparent text-gray-400 hover:text-gray-600"}`}
                 >
@@ -693,7 +730,7 @@ export default function Home() {
 
               {/* Tab Content Display */}
               <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm min-h-[350px] flex flex-col justify-between">
-                
+
                 {activeTab === "learn" && (
                   <div className="flex flex-col gap-6">
                     <h4 className="text-lg font-black font-heading text-brand-slate">Comprehensive Detailing Syllabus</h4>
@@ -877,8 +914,8 @@ export default function Home() {
 
           {/* Corporate CTA Button */}
           <div className="text-center mt-12" data-aos="fade-up">
-            <a 
-              href="#enroll" 
+            <a
+              href="#enroll"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-base shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/35 transition-all duration-200 transform hover:-translate-y-0.5"
             >
               <span>Enquire for Corporate Training</span>
@@ -903,7 +940,7 @@ export default function Home() {
 
           {/* Carousel Widget */}
           <div className="relative bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl backdrop-blur-sm">
-            
+
             {/* Quote Icon */}
             <div className="absolute top-6 left-6 text-6xl text-brand-yellow/10 font-serif leading-none select-none">
               “
@@ -919,7 +956,7 @@ export default function Home() {
               <p className="text-gray-300 text-base leading-relaxed italic">
                 {testimonials[testimonialIdx].content}
               </p>
-              
+
               <div className="border-t border-white/10 pt-6 flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center border-2 border-brand-yellow shrink-0 text-brand-yellow">
@@ -933,14 +970,14 @@ export default function Home() {
 
                 {/* Left/Right Buttons */}
                 <div className="flex gap-3">
-                  <button 
+                  <button
                     onClick={prevTestimonial}
                     className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
                     aria-label="Previous review"
                   >
                     <ChevronLeft className="w-5 h-5 text-white" />
                   </button>
-                  <button 
+                  <button
                     onClick={nextTestimonial}
                     className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
                     aria-label="Next review"
@@ -982,8 +1019,8 @@ export default function Home() {
 
           <div className="flex flex-col gap-4">
             {faqs.map((faq, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="border border-gray-100 rounded-2xl bg-gray-50 overflow-hidden transition-all duration-300"
               >
                 <button
@@ -995,7 +1032,7 @@ export default function Home() {
                     {faqOpen === index ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                   </span>
                 </button>
-                
+
                 {faqOpen === index && (
                   <div className="px-6 pb-6 text-sm text-gray-600 leading-relaxed border-t border-gray-100/50 pt-4 bg-white font-sans">
                     {faq.answer}
@@ -1010,10 +1047,10 @@ export default function Home() {
       {/* Lead Generation & Contact Form Section */}
       <section id="enroll" className="py-20 lg:py-28 bg-gradient-to-tr from-brand-blue to-brand-blue-dark text-white relative overflow-hidden scroll-mt-20 font-sans">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Form Details Copy */}
             <div className="lg:col-span-6 flex flex-col gap-6" data-aos="fade-right">
               <span className="text-brand-yellow font-extrabold text-sm uppercase tracking-widest">Enrol Now</span>
@@ -1023,7 +1060,7 @@ export default function Home() {
               <p className="text-lg text-blue-100 leading-relaxed font-sans">
                 With over 180+ successful placements, Tekera continues to empower civil engineers, draftsmen, and graduates to build highly rewarding international careers in Tekla Modeling and Structural Detailing.
               </p>
-              
+
               <div className="flex flex-col gap-4 mt-2">
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
@@ -1042,7 +1079,7 @@ export default function Home() {
               {/* Google Maps Embed for Physical Location */}
               <div className="w-full h-56 rounded-2xl overflow-hidden shadow-inner border border-blue-400/20 mt-4">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.7618991391986!2d78.68603681480097!3d10.829562992285497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf502bdfbfca5%3A0xe543e3d9396dc7db!2s7th%20Cross%20Rd%20E%2C%20Thillai%20Nagar%2C%20Tiruchirappalli%2C%20Tamil%20Nadu%20620018!5e0!3m2!1sen!2sin!4v1658145612345!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.7601275990263!2d78.68532457597148!3d10.829699689322302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf5ad101fc9dd%3A0x4ad001f2f72b489c!2sTekEra%20Training%20Center!5e0!3m2!1sen!2sin!4v1716300000000!5m2!1sen!2sin"
                   className="w-full h-full border-0"
                   allowFullScreen={false}
                   loading="lazy"
@@ -1054,7 +1091,7 @@ export default function Home() {
             {/* Actual Submission Card */}
             <div className="lg:col-span-6" data-aos="fade-left">
               <div className="bg-white text-gray-900 rounded-3xl p-8 shadow-2xl border border-gray-100 relative">
-                
+
                 {formSubmitted ? (
                   <div className="py-16 text-center flex flex-col items-center gap-4">
                     <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-3xl font-black animate-bounce">
@@ -1074,8 +1111,8 @@ export default function Home() {
 
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="name" className="text-xs font-bold text-gray-500 uppercase tracking-wider">Full Name</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         id="name"
                         name="name"
                         value={formData.name}
@@ -1089,8 +1126,8 @@ export default function Home() {
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="flex flex-col gap-1.5">
                         <label htmlFor="email" className="text-xs font-bold text-gray-500 uppercase tracking-wider">Email Address</label>
-                        <input 
-                          type="email" 
+                        <input
+                          type="email"
                           id="email"
                           name="email"
                           value={formData.email}
@@ -1103,14 +1140,14 @@ export default function Home() {
 
                       <div className="flex flex-col gap-1.5">
                         <label htmlFor="phone" className="text-xs font-bold text-gray-500 uppercase tracking-wider">Phone Number</label>
-                        <input 
-                          type="tel" 
+                        <input
+                          type="tel"
                           id="phone"
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          placeholder="+91 86672 99312"
+                          placeholder="+91 86087 19878"
                           className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-blue focus:bg-white text-sm text-gray-800 transition-colors"
                         />
                       </div>
@@ -1118,14 +1155,14 @@ export default function Home() {
 
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="timing" className="text-xs font-bold text-gray-500 uppercase tracking-wider">Preferred Timing</label>
-                      <select 
+                      <select
                         id="timing"
                         name="timing"
                         value={formData.timing}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-blue focus:bg-white text-sm text-gray-800 transition-colors"
                       >
-                        <option value="Full-Time">Full-Time (Mon-Fri)</option>
+                        {/* <option value="Full-Time">Full-Time (Mon-Fri)</option> */}
                         <option value="Part-Time Morning">Part-Time Morning Batch</option>
                         <option value="Part-Time Evening">Part-Time Evening Batch</option>
                         <option value="Weekend batch">Weekend Batch</option>
@@ -1134,7 +1171,7 @@ export default function Home() {
 
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="message" className="text-xs font-bold text-gray-500 uppercase tracking-wider">Message (Optional)</label>
-                      <textarea 
+                      <textarea
                         id="message"
                         name="message"
                         value={formData.message}
@@ -1145,7 +1182,7 @@ export default function Home() {
                       />
                     </div>
 
-                    <button 
+                    <button
                       type="submit"
                       className="mt-2 w-full py-4 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold rounded-xl text-center shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/35 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 font-heading"
                     >
@@ -1161,16 +1198,16 @@ export default function Home() {
                     Prefer direct contact?
                   </div>
                   <div className="flex items-center gap-3">
-                    <a 
-                      href="tel:+918667299312" 
+                    <a
+                      href="tel:+918608719878"
                       className="px-4 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold text-xs flex items-center gap-2 border border-gray-200 transition-colors"
                     >
                       <Phone className="w-3.5 h-3.5 text-brand-blue" />
                       <span>Call Us</span>
                     </a>
-                    <a 
-                      href="https://wa.me/918667299312" 
-                      target="_blank" 
+                    <a
+                      href="https://wa.me/918608719878"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2 rounded-lg bg-green-50 hover:bg-green-100 text-green-700 font-bold text-xs flex items-center gap-2 border border-green-200 transition-colors"
                     >
@@ -1191,14 +1228,14 @@ export default function Home() {
       <footer className="bg-brand-slate text-white pt-16 pb-8 border-t border-white/5 font-sans">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
-            
+
             {/* Brand details and logo */}
             <div className="lg:col-span-5 flex flex-col gap-4">
               <div className="flex items-center gap-3">
-                <img 
-                  src="/Tek_Logo.png" 
-                  alt="TeKeRa Training Center Logo" 
-                  className="h-16 w-auto object-contain bg-white rounded-2xl px-4 py-2 shadow-md" 
+                <img
+                  src="/Tek_Logo.png"
+                  alt="TeKeRa Training Center Logo"
+                  className="h-16 w-auto object-contain bg-white rounded-2xl px-4 py-2 shadow-md"
                 />
               </div>
               <p className="text-sm text-gray-400 max-w-sm leading-relaxed font-sans">
@@ -1215,7 +1252,7 @@ export default function Home() {
                 <a href="https://youtube.com/@tekera_training" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-slate transition-all" aria-label="YouTube">
                   <Youtube className="w-4 h-4" />
                 </a>
-                <a href="https://wa.me/918667299312" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-slate transition-all" aria-label="WhatsApp">
+                <a href="https://wa.me/918608719878" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-slate transition-all" aria-label="WhatsApp">
                   <MessageSquare className="w-4 h-4" />
                 </a>
               </div>
@@ -1239,22 +1276,22 @@ export default function Home() {
               <ul className="flex flex-col gap-3.5 text-sm text-gray-400 font-sans">
                 <li className="flex items-start gap-2.5">
                   <MapPin className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
-                  <a 
-                    href="https://maps.google.com/?q=No.302,+D-1,+7th+Cross+Road+East,+Thillai+Nagar,+Tiruchirappalli,+Tamil+Nadu+620018" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <a
+                    href="https://maps.app.goo.gl/obQoWYRdwY2wzQkV9"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-white transition-colors leading-relaxed"
                   >
-                    No.302, D-1, 7th Cross Road East, Thillai Nagar, Tiruchirappalli, Tamil Nadu 620018
+                    Gowri Krishna Residency, No.302, D-1, 7th Cross Road East, Thillai Nagar, Tiruchirappalli, Tamil Nadu 620018
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Phone className="w-5 h-5 text-brand-yellow shrink-0" />
-                  <a href="tel:+918667299312" className="hover:text-white transition-colors">+91 86672 99312</a>
+                  <a href="tel:+918608719878" className="hover:text-white transition-colors">+91 86087 19878</a>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail className="w-5 h-5 text-brand-yellow shrink-0" />
-                  <a href="mailto:info@tekera.in" className="hover:text-white transition-colors">info@tekera.in</a>
+                  <a href="mailto:enquiry@tekera.in" className="hover:text-white transition-colors">enquiry@tekera.in</a>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Globe className="w-5 h-5 text-brand-yellow shrink-0" />
