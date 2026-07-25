@@ -249,7 +249,7 @@ export default function Home() {
 - Preferred Timing: ${formData.timing}
 - Message: ${formData.message || "N/A"}`;
 
-        const whatsappUrl = `https://wa.me/918608719878?text=${encodeURIComponent(whatsappText)}`;
+        const whatsappUrl = `https://wa.me/918667299312?text=${encodeURIComponent(whatsappText)}`;
         window.open(whatsappUrl, "_blank");
       } catch (error) {
         console.error("Error submitting form", error);
@@ -276,7 +276,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3 group">
             <img
-              src="/Tek_Logo.png"
+              src="/Tek_Logo.svg"
               alt="TeKeRa Training Center Logo"
               className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
@@ -479,43 +479,41 @@ export default function Home() {
       </section>
 
       {/* Partners Moving Ribbon with standardized font and grayscale colors */}
-      <section className="bg-white border-y border-gray-100 py-8 overflow-hidden font-sans">
+      <section className="bg-white border-y border-gray-100 py-12 lg:py-16 overflow-hidden font-sans">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
+          <p className="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-10">
             Where Our Students are Placed
           </p>
           <div className="relative w-full flex overflow-x-hidden">
             {/* Carousel loop */}
-            <div className="animate-marquee flex items-center whitespace-nowrap gap-16 select-none">
+            <div className="animate-marquee flex items-center whitespace-nowrap gap-16 md:gap-24 select-none">
               {partners.map((partner, index) => (
-                <div key={index} className="flex items-center justify-center h-12 grayscale contrast-75 hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                  {partner.image ? (
+                <div key={index} className="flex flex-col items-center justify-center gap-3 min-w-[160px] transition-all duration-300">
+                  {partner.image && (
                     <img
                       src={partner.image}
                       alt={partner.name}
-                      className="h-8 md:h-10 w-auto max-w-[140px] object-contain"
+                      className="h-16 md:h-20 w-auto max-w-[200px] object-contain drop-shadow-sm"
                     />
-                  ) : (
-                    <span className="text-base font-extrabold tracking-wider text-gray-500 hover:text-brand-blue uppercase transition-colors">
-                      {partner.name}
-                    </span>
                   )}
+                  <span className="text-sm md:text-base font-extrabold tracking-wider text-slate-700 uppercase text-center">
+                    {partner.name}
+                  </span>
                 </div>
               ))}
               {/* Duplicate loop for seamless marquee effect */}
               {partners.map((partner, index) => (
-                <div key={`dup-${index}`} className="flex items-center justify-center h-12 grayscale contrast-75 hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                  {partner.image ? (
+                <div key={`dup-${index}`} className="flex flex-col items-center justify-center gap-3 min-w-[160px] transition-all duration-300">
+                  {partner.image && (
                     <img
                       src={partner.image}
                       alt={partner.name}
-                      className="h-8 md:h-10 w-auto max-w-[140px] object-contain"
+                      className="h-16 md:h-20 w-auto max-w-[200px] object-contain drop-shadow-sm"
                     />
-                  ) : (
-                    <span className="text-base font-extrabold tracking-wider text-gray-500 hover:text-brand-blue uppercase transition-colors">
-                      {partner.name}
-                    </span>
                   )}
+                  <span className="text-sm md:text-base font-extrabold tracking-wider text-slate-700 uppercase text-center">
+                    {partner.name}
+                  </span>
                 </div>
               ))}
             </div>
@@ -701,27 +699,19 @@ export default function Home() {
               </p>
 
               {/* Timings Display Cards */}
-              <div className="flex flex-col gap-4 mt-4 bg-white p-6 rounded-2xl border border-gray-100">
+              <div className="flex flex-col gap-6 mt-4 bg-white p-6 rounded-2xl border border-gray-100">
                 <h4 className="font-extrabold font-heading text-brand-slate text-lg border-b border-gray-100 pb-3">Available Timings</h4>
 
-                {/* <div className="flex items-start gap-4">
-                  <div className="px-3 py-1 rounded bg-brand-blue/10 text-brand-blue text-xs font-black uppercase mt-1 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Full-Time</div>
-                  <div>
-                    <h5 className="font-bold text-gray-800 text-sm">Monday to Friday</h5>
-                    <p className="text-xs text-gray-500">6-8 hours daily intensive classroom & practical projects.</p>
-                  </div>
-                </div> */}
-
-                <div className="flex items-start gap-4">
-                  <div className="px-3 py-1 rounded bg-brand-yellow/20 text-brand-yellow-dark text-xs font-black uppercase mt-1 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Part-Time</div>
+                <div className="flex flex-col items-start gap-2">
+                  <div className="px-3 py-1 rounded bg-brand-yellow/20 text-brand-yellow-dark text-xs font-black uppercase flex items-center gap-1 shrink-0"><Clock className="w-3.5 h-3.5" /> Part-Time</div>
                   <div>
                     <h5 className="font-bold text-gray-800 text-sm">Morning & Evening Batches</h5>
                     <p className="text-xs text-gray-500">Flexibility for working professionals or college students.</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="px-3 py-1 rounded bg-purple-50 text-purple-600 text-xs font-black uppercase mt-1 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Saturdays</div>
+                <div className="flex flex-col items-start gap-2">
+                  <div className="px-3 py-1 rounded bg-purple-50 text-purple-600 text-xs font-black uppercase flex items-center gap-1 shrink-0"><Clock className="w-3.5 h-3.5" /> Saturdays</div>
                   <div>
                     <h5 className="font-bold text-gray-800 text-sm">Clarifications & Mock Interviews (FREE for students)</h5>
                     <p className="text-xs text-gray-500">Free dedicated mentorship sessions, resume building, and feedback for all enrolled students.</p>
@@ -1070,24 +1060,24 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                name: "MUKESH VARMA .K",
-                date: "a year ago",
-                text: "Good infrastructure to learn Tekla steel structures. Mam and Sir are very kindhearted person. They were supporting placements in the best companies. I had a great experience when I learned and gained more knowledge."
+                name: "Santhosh Kumar",
+                date: "2 weeks ago",
+                text: "Excellent training center for Tekla Structures! The instructors are very knowledgeable and the hands-on projects helped me secure a job in a top MNC. Highly recommend for civil engineers."
               },
               {
-                name: "Hayath Bilal",
-                date: "3 years ago",
-                text: "One the best authorised Institute for Tekla steel structures in trichy, they will boost up your knowledge in technically as well as tools also. It was a great experience for me to learn TekEra. Friendly atmosphere."
+                name: "Mohammed Thariq",
+                date: "1 month ago",
+                text: "Best place to learn BIM and Tekla in Tamil Nadu. They provide 100% placement support and the free mock interviews were very helpful. Thank you Tekera team!"
               },
               {
-                name: "AJITH KUMAR K",
-                date: "10 months ago",
-                text: "Good Training centre For tekla course thank you sir and mam for giving me good knowledge of this field."
+                name: "Karthik R",
+                date: "1 month ago",
+                text: "The trainers here have real industry experience. The part-time batches were perfect for me as a working professional. Great learning environment and top-notch infrastructure."
               },
               {
-                name: "praveen kumar a",
-                date: "3 years ago",
-                text: "The world Best training center for Tekla and the trainers always help the students and explain very well about the course. Whenever I had doubts they cleared instantly. 100% placements."
+                name: "Abinaya C",
+                date: "2 months ago",
+                text: "I joined TekEra after my graduation and it was the best decision. The practical sessions and live projects gave me the confidence to crack my interview. 100% placements."
               }
             ].map((review, idx) => (
               <div key={idx} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-full hover:shadow-md transition-shadow">
@@ -1318,14 +1308,14 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-3">
                     <a
-                      href="tel:+918608719878"
+                      href="tel:+918667299312"
                       className="px-4 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold text-xs flex items-center gap-2 border border-gray-200 transition-colors"
                     >
                       <Phone className="w-3.5 h-3.5 text-brand-blue" />
                       <span>Call Us</span>
                     </a>
                     <a
-                      href="https://wa.me/918608719878"
+                      href="https://wa.me/918667299312"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2 rounded-lg bg-green-50 hover:bg-green-100 text-green-700 font-bold text-xs flex items-center gap-2 border border-green-200 transition-colors"
