@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   verification: {
     google: "Ty6nUJL9JHxSVjtd6bm9hQhj_oJT5d_Te2RkbgtpUHs",
   },
+  icons: {
+    icon: "/square_icon.png",
+    shortcut: "/square_icon.png",
+    apple: "/square_icon.png",
+  },
   openGraph: {
     title: "Tekera | Authorized Tekla Training Center in Tamil Nadu",
     description: "Achieve a successful career as a Tekla Structures expert by training at the Tekera Training Center, where we assist you to secure a valuable job placement. Over 180+ placements.",
