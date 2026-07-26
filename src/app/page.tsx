@@ -169,7 +169,7 @@ const partners = [
   { name: "AISD Engineering", image: "/partner/asid.jfif" },
   { name: "Cistron Infotek", image: "/partner/cistron.jpeg" },
   { name: "Unicrest Engineering", image: "/partner/unicrest.jpeg" },
-  { name: "4D Detailing", image: "/partner/4d.jpg" },
+  { name: "4D Detailing", image: "/partner/4D.jpg" },
   { name: "Duinz Engineering", image: "/partner/Duinz_Eng.svg" },
   { name: "Strutech", image: "/partner/Strutech.png" },
   { name: "ASD Engineering", image: "/partner/ASD_Engi.webp" },
