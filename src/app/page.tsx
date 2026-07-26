@@ -166,7 +166,7 @@ const partners = [
   { name: "Gen Engineering", image: "/partner/Gen_Eng.jpg" },
   { name: "Edanbrook", image: "/partner/Edanbrook.png" },
   { name: "Fidelis", image: "/partner/Fidelis.png" },
-  { name: "AISD Engineering", image: "/partner/asid.jfif" },
+  { name: "AISD Engineering", image: "/partner/AISD.jpeg" },
   { name: "Cistron Infotek", image: "/partner/cistron.jpeg" },
   { name: "Unicrest Engineering", image: "/partner/unicrest.jpeg" },
   { name: "4D Detailing", image: "/partner/4D.jpg" },
@@ -176,7 +176,7 @@ const partners = [
   { name: "Caldim Engineering", image: "/partner/Caldim_Eng.png" },
   { name: "Eversendai", image: "/partner/eversendai.jpeg" },
   { name: "DGS", image: "/partner/dgs.jpeg" },
-  { name: "Pangulf", image: "" }
+  { name: "Pangulf", image: "/partner/Pangulf.jpeg" }
 ];
 
 export default function Home() {
